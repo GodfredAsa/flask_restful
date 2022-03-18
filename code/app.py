@@ -8,8 +8,7 @@ app = Flask(__name__)
 app.secret_key = 'jose'
 api = Api(app)
 
-# creates a new endpoint => /auth
-jwt = JWT(app, authenticate, identity)
+jwt = JWT(app, authenticate, identity)  # creates a new endpoint => /auth
 
 items = []
 
@@ -34,11 +33,13 @@ class Item(Resource):
         items.append(item)
         return item, 201
 
+    @jwt_required()
     def delete(self, name):
         global items
         items = list(filter(lambda x: x['name'] != name, items))
         return {'message': "'{}' deleted".format(name)}
 
+    @jwt_required()
     def put(self, name):
         data = Item.parser.parse_args()
         item = next(filter(lambda x: x['name'] == name, items), None)
