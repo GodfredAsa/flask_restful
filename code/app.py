@@ -11,6 +11,7 @@ jwt = JWT(app, authenticate, identity)  # creates a new endpoint => /auth
 
 items = []
 
+
 class Item(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('price',
@@ -21,7 +22,8 @@ class Item(Resource):
     @jwt_required()
     def get(self, name):
         item = next(filter(lambda x: x['name'] == name, items), None)
-        return {'item': item}, 200 if item else 404
+        context = {'item': item}
+        return context, 200 if item else 404
 
     def post(self, name):
         if next(filter(lambda x: x['name'] == name, items), None):
