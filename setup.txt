@@ -1,0 +1,13 @@
+BELOW ARE THE INSTRUCTIONS FOR RUNNING THIS SERVER
+
+1. delete the data.db
+2. run the test.py to create the database
+3. try all the end points
+4. auth/ endpoint requires a user and password inside the test.py Eg :
+{
+    "username": "rolf",
+    "password": "1234"
+}
+
+reqparser ensures that a particular field is always part of the request
+class methods belong to the class but not the instance and affect all.
