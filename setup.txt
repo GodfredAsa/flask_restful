@@ -11,3 +11,31 @@ BELOW ARE THE INSTRUCTIONS FOR RUNNING THIS SERVER
 
 reqparser ensures that a particular field is always part of the request
 class methods belong to the class but not the instance and affect all.
+
+THIS CURRENT IMPLEMENTATION
+
+1. Has a user model
+2. Registration which takes a username and password and returns JWT
+3. uses sql3lite database
+4. Has classmethods for adherence to DRY
+
+RUNNING THE APPLICATION ON THIS BRANCH
+0. activate the virtual env ==> .\venv\Scripts\activate
+1. delete the data.db file using ==>  rm .\code\data.db
+2. run the create_tables.py file  ==>  python .\code\create_tables.py
+3. run the app.py file ==> .\code\app.py
+
+
+ENDPOINTS
+BASE_URL = http://127.0.0.1:5000
+
+REGISTRATION  = BASE_URL/register  <= username and password  => message
+AUTHENTICATION  = BASE_URL/auth    <=  username and password  => JWT
+Items
+    - post takes name {path variable) and price which is a requesst body
+    - put update item follows the post convention above
+    - name to return the item if found and error message if not
+    - delete takes in item name to delete
+    - item names are unique
+ItemList
+    - get returns the list of all items in the database

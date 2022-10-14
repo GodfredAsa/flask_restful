@@ -1,5 +1,6 @@
 import sqlite3
 from flask_restful import Resource, reqparse
+from constants import DB_PATH
 
 
 class User:
@@ -10,7 +11,7 @@ class User:
 
     @classmethod
     def find_by_username(cls, username):
-        connection = sqlite3.connect("data.db")
+        connection = sqlite3.connect(DB_PATH)
         cursor = connection.cursor()
         query = "SELECT * FROM users WHERE username =?"
         result = cursor.execute(query, (username,))
@@ -24,7 +25,7 @@ class User:
 
     @classmethod
     def find_by_id(cls, _id):
-        connection = sqlite3.connect("data.db")
+        connection = sqlite3.connect(DB_PATH)
         cursor = connection.cursor()
         query = "SELECT * FROM users WHERE id =?"
         result = cursor.execute(query, (_id,))
@@ -56,7 +57,7 @@ class UserRegister(Resource):
         if user:
             return {"message": "A user with username {} already exists".format(data['username'])}, 400
 
-        connection = sqlite3.connect("data.db")
+        connection = sqlite3.connect(DB_PATH)
         cursor = connection.cursor()
         query = "INSERT INTO users VALUES (NULL, ?, ?)"
         cursor.execute(query, (data['username'], data['password']))
